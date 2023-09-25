@@ -36,7 +36,7 @@ jobs:
       - uses: usimd/pi-gen-action@v1
         id: build
         with:
-          compression: none
+          compression: xz
           disable-first-boot-user-rename: true
           export-last-stage-only: true
           hostname: test-hostname
