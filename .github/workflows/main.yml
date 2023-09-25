@@ -4,6 +4,8 @@ jobs:
   pi-gen-create-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - run: |
           mkdir -p test-stage/package-test &&
           {
