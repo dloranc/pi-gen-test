@@ -1,13 +1,41 @@
 name: "pi gen test"
 on: [push]
 jobs:
-  pi-gen-upload-image:
+  pi-gen-create-image:
     runs-on: ubuntu-latest
     steps:
+      - run: |
+          mkdir -p test-stage/package-test &&
+          {
+          cat > test-stage/package-test/00-run-chroot.sh <<-EOF
+          #!/bin/bash
+          cd /home/test-user
+          cat > hello.cpp <<-EOF2
+          #include <iostream>
+
+          int main() {
+            std::cout << "Hello, World!" << std::endl;
+          }
+          EOF2
+          g++ -o hello hello.cpp
+          rm hello.cpp
+          EOF
+          } &&
+          chmod +x test-stage/package-test/00-run-chroot.sh &&
+          echo "" > test-stage/package-test/01-packages &&
+          {
+          cat > test-stage/prerun.sh <<-EOF
+          #!/bin/bash -e
+          if [ ! -d "\${ROOTFS_DIR}" ]; then
+            copy_previous
+          fi
+          EOF
+          } &&
+          chmod +x test-stage/prerun.sh
       - uses: usimd/pi-gen-action@v1
         id: build
         with:
-          compression: xz
+          compression: zip
           compression-level: 9
           disable-first-boot-user-rename: true
           export-last-stage-only: true
@@ -19,9 +47,11 @@ jobs:
           password: password
           pi-gen-version: arm64
           release: bullseye
+          stage-list: stage0 stage1 stage2 ./test-stage
           timezone: America/Chicago
           username: test-user
           wpa-country: US
+          verbose-output: true
 
       - uses: actions/upload-artifact@v3
         with:
