@@ -7,7 +7,7 @@ jobs:
       - run: |
           mkdir -p test-stage/package-test &&
           {
-          cat > test-stage/package-test/00-run-chroot.sh <<-EOF
+          cat > test-stage/package-test/00-run.sh <<-EOF
           #!/bin/bash
           cd /home/test-user
           cat > hello.cpp <<-EOF2
@@ -22,7 +22,7 @@ jobs:
           find / -type f -name "run.sh" 2>/dev/null
           EOF
           } &&
-          chmod +x test-stage/package-test/00-run-chroot.sh &&
+          chmod +x test-stage/package-test/00-run.sh &&
           echo "" > test-stage/package-test/01-packages &&
           {
           cat > test-stage/prerun.sh <<-EOF
