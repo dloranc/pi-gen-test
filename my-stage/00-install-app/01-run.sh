@@ -15,9 +15,11 @@ find / -type f -name "run.sh"
 
 ##############################
 
-# install -m 644 files/hello.cpp "${ROOTFS_DIR}/home/test-user"
+cd files
+on_chroot << EOF
+g++ -o hello hello.cpp
 
-# cd /home/test-user
-
-# g++ -o hello hello.cpp
-# rm hello.cpp
+install -m 755 hello "${ROOTFS_DIR}/home/test-user"
+cd ..
+install -m 755 run.sh "${ROOTFS_DIR}/home/test-user"
+EOF
