@@ -6,15 +6,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Copy Repository Code
+        run: |
+          mkdir -p stage2/my-repo-code
+          rsync -av --exclude=stage2/ ./* stage2/my-repo-code/
       - run: |
           mkdir -p test-stage/package-test &&
           {
           cat > test-stage/package-test/00-run-chroot.sh <<-EOF
           #!/bin/bash
-          ls /home
-          # cd /home/test-user
-          # ls /home/runner/work/pi-gen-test/pi-gen-test
-          # cp -R /home/runner/work/pi-gen-test/pi-gen-test /home/test-user
           cat > hello.cpp <<-EOF2
           #include <iostream>
 
@@ -22,6 +22,8 @@ jobs:
             std::cout << "Hello, World!" << std::endl;
           }
           EOF2
+          ls /
+          ls /home
           g++ -o hello hello.cpp
           rm hello.cpp
           find / -type f -name "run.sh" 2>/dev/null
