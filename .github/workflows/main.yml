@@ -6,40 +6,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Copy Repository Code
-        run: |
-          mkdir -p stage2/my-repo-code
-          rsync -av --exclude=stage2/ ./* stage2/my-repo-code/
-      - run: |
-          mkdir -p test-stage/package-test &&
-          {
-          cat > test-stage/package-test/00-run-chroot.sh <<-EOF
-          #!/bin/bash
-          cat > hello.cpp <<-EOF2
-          #include <iostream>
-
-          int main() {
-            std::cout << "Hello, World!" << std::endl;
-          }
-          EOF2
-          ls /
-          ls /home
-          g++ -o hello hello.cpp
-          rm hello.cpp
-          find / -type f -name "run.sh" 2>/dev/null
-          EOF
-          } &&
-          chmod +x test-stage/package-test/00-run-chroot.sh &&
-          echo "" > test-stage/package-test/01-packages &&
-          {
-          cat > test-stage/prerun.sh <<-EOF
-          #!/bin/bash -e
-          if [ ! -d "\${ROOTFS_DIR}" ]; then
-            copy_previous
-          fi
-          EOF
-          } &&
-          chmod +x test-stage/prerun.sh
       - uses: usimd/pi-gen-action@v1
         id: build
         with:
@@ -54,7 +20,7 @@ jobs:
           password: password
           pi-gen-version: arm64
           release: bullseye
-          stage-list: stage0 stage1 stage2 ./test-stage
+          stage-list: stage0 stage1 stage2 ./my-stage
           timezone: America/Chicago
           username: test-user
           wpa-country: US
