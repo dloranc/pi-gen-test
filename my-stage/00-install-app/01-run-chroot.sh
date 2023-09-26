@@ -10,8 +10,15 @@ echo "ls /home"
 ls /home
 
 echo "Find run.sh file"
-find / -type f -name "run.sh" 2>/dev/null && echo "File found." || echo "File not found or an error occurred."
-find / -type f -name "run.sh"
+result=$(find / -type f -name "run.sh")
+
+# Check if the result is empty (i.e., no matching files were found)
+if [ -z "$result" ]; then
+    echo "No 'run.sh' files found."
+else
+    echo "Found 'run.sh' files:"
+    echo "$result"
+fi
 
 ##############################
 
