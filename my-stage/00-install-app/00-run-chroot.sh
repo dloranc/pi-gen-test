@@ -1,14 +1,7 @@
-#!/bin/bash
-cd /home/test-user
-cat > hello.cpp <<-EOF2
-#include <iostream>
+#!/bin/bash -e
 
-int main() {
-  std::cout << "Hello, World!" << std::endl;
-}
-EOF2
-g++ -o hello hello.cpp
-rm hello.cpp
+echo "ls current directory"
+ls
 
 echo "ls /"
 ls /
@@ -18,3 +11,12 @@ ls /home
 
 echo "Find run.sh file"
 find / -type f -name "run.sh" 2>/dev/null && echo "File found." || echo "File not found or an error occurred."
+
+##############################
+
+install -m 644 files/hello.cpp "${ROOTFS_DIR}/home/test-user"
+
+cd /home/test-user
+
+g++ -o hello hello.cpp
+rm hello.cpp
