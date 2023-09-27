@@ -12,9 +12,12 @@ ls /home
 echo "Find run.sh file"
 result=$(find / -type f -name "run.sh")
 
+echo "return code: $?"
+
 # Check if the result is empty (i.e., no matching files were found)
 if [ -z "$result" ]; then
     echo "No 'run.sh' files found."
+    echo $result
 else
     echo "Found 'run.sh' files:"
     echo "$result"
