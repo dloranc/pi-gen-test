@@ -4,8 +4,8 @@
 echo "ls /home"
 ls /home
 
-echo "ls /home/runner"
-ls /home/runner
+echo "ls /home/runner/pi-gen-test"
+ls /home/runner/pi-gen-test
 
 cd /home/test-user
 
