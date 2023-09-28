@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+echo "ls /"
+ls /
 
 echo "ls /home"
 ls /home
