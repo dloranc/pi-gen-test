@@ -6,8 +6,7 @@ ls /
 echo "ls /home"
 ls /home
 
-echo "ls /home/runner/pi-gen-test"
-ls /home/runner/pi-gen-test
+find / -type d -name "runner"
 
 cd /home/test-user
 
