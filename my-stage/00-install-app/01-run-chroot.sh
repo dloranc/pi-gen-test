@@ -1,7 +1,11 @@
 #!/bin/bash -e
 
+
 echo "ls /home"
 ls /home
+
+echo "ls /home/runner"
+ls /home/runner
 
 cd /home/test-user
 
