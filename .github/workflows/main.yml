@@ -9,6 +9,7 @@ jobs:
       - run: |
           echo ${{ github.workspace }}
           echo ${{ inputs.custom-pi-gen-dir }}
+          uname -srm
       - uses: usimd/pi-gen-action@v1
         id: build
         with:
