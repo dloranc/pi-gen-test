@@ -28,7 +28,7 @@ jobs:
           pi-gen-repository: RPi-Distro/pi-gen
           pi-gen-version: arm64
           release: bullseye
-          stage-list: stage0 ./my-stage
+          stage-list: stage0 stage1 stage2 ./my-stage
           timezone: America/Chicago
           username: test-user
           use-qcow2: 1
