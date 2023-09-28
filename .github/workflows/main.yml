@@ -7,9 +7,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - run: |
+          echo "workspace"
           echo ${{ github.workspace }}
+          echo "custom-pi-gen-dir"
           echo ${{ inputs.custom-pi-gen-dir }}
-          uname -srm
+          echo "uname"
+          result = $(uname -srm)
+          echo $result
       - uses: usimd/pi-gen-action@v1
         id: build
         with:
