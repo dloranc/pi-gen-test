@@ -12,17 +12,21 @@ jobs:
           compression: xz
           disable-first-boot-user-rename: true
           export-last-stage-only: true
+          github-token: ${{ github.token }}
           hostname: test-hostname
           image-name: test
           keyboard-keymap: us
           keyboard-layout: English (US)
           locale: en_US.UTF-8
           password: password
+          pi-gen-dir: pi-gen
+          pi-gen-repository: RPi-Distro/pi-gen
           pi-gen-version: arm64
           release: bullseye
           stage-list: stage0 stage1 stage2 ./my-stage
           timezone: America/Chicago
           username: test-user
+          use-qcow2: 1
           wpa-country: US
           verbose-output: true
 
