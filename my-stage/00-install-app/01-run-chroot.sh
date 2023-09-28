@@ -1,31 +1,18 @@
 #!/bin/bash -e
 
-echo "ls current directory"
-ls
-
-echo "ls /"
-ls /
-
 echo "ls /home"
 ls /home
 
-echo "Find run.sh file"
-result=$(find / -type f -name "run.sh")
+cd /home/test-user
 
-echo "return code: $?"
+git clone git@github.com:dloranc/pi-gen-test.git
 
-# Check if the result is empty (i.e., no matching files were found)
-if [ -z "$result" ]; then
-    echo "No 'run.sh' files found."
-    echo $result
-else
-    echo "Found 'run.sh' files:"
-    echo "$result"
-fi
-
-##############################
+cd pi-gen-test/src
 
 g++ -o hello hello.cpp
 
 install -m 755 hello "${ROOTFS_DIR}/home/test-user"
-install -m 755 files/run.sh "${ROOTFS_DIR}/home/test-user"
+
+cd ..
+
+install -m 755 run.sh "${ROOTFS_DIR}/home/test-user"
