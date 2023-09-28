@@ -11,9 +11,6 @@ jobs:
           echo ${{ github.workspace }}
           echo "custom-pi-gen-dir"
           echo ${{ inputs.custom-pi-gen-dir }}
-          echo "uname"
-          result = $(uname -srm)
-          echo $result
       - uses: usimd/pi-gen-action@v1
         id: build
         with:

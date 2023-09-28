@@ -1,5 +1,9 @@
 #!/bin/bash -e
 
+echo "uname"
+result = $(uname -srm)
+echo $result
+
 echo "ls /"
 ls /
 
