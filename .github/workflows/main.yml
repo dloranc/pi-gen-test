@@ -7,6 +7,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - run: |
+          echo "ls"
+          ls
+          echo "ls /"
+          ls /
+          echo "ls /home"
+          ls /home
           echo "workspace"
           echo ${{ github.workspace }}
           echo "custom-pi-gen-dir"
